@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .disable-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .dark-theme {
+    --primary-bg: 21, 22, 25;
+    --secondary-bg: 27, 30, 35;
+    --navlink-bg-selected: 42, 44, 49;
+    --navlink-ring-color: 42, 44, 49;
+    --navlink-ring-offset-color: 21, 22, 25;
+    --navlink-text-selected: 60, 130, 249;
+  }
+
+  .btn-primary {
+    --btn-bg-color: 37, 99, 235;
+    --btn-text-color: 255, 255, 255;
+    --btn-spinner-color: 255, 255, 255;
+    --btn-bg-hover-color: 59, 130, 246;
+    --btn-bg-active-color: 59, 130, 246;
+    --btn-ring-color: 59, 130, 246;
+    --btn-disabled-color: 224, 242, 254;
+  }
+
+  .btn-secondary {
+    --btn-bg-color: 209, 213, 219;
+    --btn-text-color: 31, 41, 55;
+    --btn-spinner-color: 31, 41, 55;
+    --btn-bg-hover-color: 229, 231, 235;
+    --btn-bg-active-color: 229, 231, 235;
+    --btn-ring-color: 229, 231, 235;
+    --btn-disabled-color: 229, 231, 235;
+  }
+
+  .btn-unstyled {
+    --btn-bg-color: 255, 255, 255;
+    --btn-text-color: 0, 0, 0;
+    --btn-spinner-color: 31, 41, 55;
+    --btn-bg-hover-color: 229, 231, 235;
+    --btn-bg-active-color: 229, 231, 235;
+    --btn-ring-color: 55, 65, 81;
+    --btn-disabled-color: 229, 231, 235;
+  }
+}
