@@ -50,7 +50,7 @@ const DDA = () => {
   };
 
   return (
-    <main className="flex min-h-screen w-full flex-col-reverse items-start justify-between gap-10 p-10 xl:flex-row">
+    <main className="flex min-h-screen w-full flex-col-reverse items-start justify-between gap-10 p-5 md:p-10 xl:flex-row">
       {/* grid */}
       <div className="aspect-square w-full flex-shrink-0 xl:w-[700px]">
         <div
