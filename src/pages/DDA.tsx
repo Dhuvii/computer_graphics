@@ -1,13 +1,14 @@
 import { Fragment, useState } from "react";
-import genGrid from "../utilities/genGrid";
-import dda from "../functions/dda";
-import Input from "../components/inputs/Input";
 import { Button } from "../components/Button";
+import Input from "../components/inputs/Input";
+import dda from "../functions/dda";
+import genGrid from "../utilities/genGrid";
 
 const DDA = () => {
   const row = 20;
   const col = 20;
   const [plane, setPlane] = useState(genGrid(row, col));
+  const clean = genGrid(row, col);
 
   const [points, setPoints] = useState({
     p1: { x: 0, y: 0 },
@@ -31,22 +32,16 @@ const DDA = () => {
   });
 
   const plot = (coordinates: number[][]) => {
-    setPlane(genGrid(row, col));
+    setPlane(clean);
+    const updatedPlane = [...clean];
     coordinates.forEach((coord) => {
       const x = coord[0];
       const y = coord[1];
-
-      setPlane((pv) =>
-        pv.map((row, r_i) =>
-          row.map((col, c_i) => {
-            if (r_i + 1 === y && c_i + 1 === x) {
-              return 1;
-            }
-            return col;
-          }),
-        ),
-      );
+      const row = [...updatedPlane[y]];
+      row[x] = 1;
+      updatedPlane[y] = row;
     });
+    setPlane(updatedPlane);
   };
 
   return (
@@ -97,7 +92,7 @@ const DDA = () => {
                   placeholder="x"
                   type="number"
                   min={0}
-                  max={col}
+                  max={col - 1}
                   value={points.p1.x}
                   onChange={(e) =>
                     setPoints((pv) => {
@@ -111,7 +106,7 @@ const DDA = () => {
                   placeholder="y"
                   type="number"
                   min={0}
-                  max={col}
+                  max={col - 1}
                   value={points.p1.y}
                   onChange={(e) =>
                     setPoints((pv) => {
@@ -131,7 +126,7 @@ const DDA = () => {
                   placeholder="x"
                   type="number"
                   min={0}
-                  max={col}
+                  max={col - 1}
                   value={points.p2.x}
                   onChange={(e) =>
                     setPoints((pv) => {
@@ -145,7 +140,7 @@ const DDA = () => {
                   placeholder="y"
                   type="number"
                   min={0}
-                  max={col}
+                  max={col - 1}
                   value={points.p2.y}
                   onChange={(e) =>
                     setPoints((pv) => {
