@@ -9,11 +9,13 @@ import {
 import "./index.css";
 import RootLayout from "./layout/RootLayout";
 import DDA from "./pages/DDA";
+import Bressenham from "./pages/Bressenham";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route path="/" element={<DDA />} />
+      <Route path="/dda" element={<DDA />} />
+      <Route path="/bressenham" element={<Bressenham />} />
     </Route>,
   ),
 );

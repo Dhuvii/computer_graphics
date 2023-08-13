@@ -1,11 +1,11 @@
 import { Fragment, useState } from "react";
 import { Button } from "../components/Button";
 import Input from "../components/inputs/Input";
-import dda from "../functions/dda";
 import genGrid from "../utilities/genGrid";
 import isValid from "../utilities/isValid";
+import bressenham from "../functions/bressenham";
 
-const DDA = () => {
+const Bressenham = () => {
   const row = 20;
   const col = 20;
   const [plane, setPlane] = useState(genGrid(row, col));
@@ -81,12 +81,14 @@ const DDA = () => {
           className="w-full"
           onSubmit={(e) => {
             e.preventDefault();
-            setValues(dda(points));
-            plot(dda(points).coordinates);
+            setValues(bressenham(points));
+            plot(bressenham(points).coordinates);
           }}
         >
-          <h1 className="text-3xl font-medium text-gray-800">DDA Algorithm</h1>
-          <p className="text-sm text-gray-600">Digital Differential Analyzer</p>
+          <h1 className="text-3xl font-medium text-gray-800">
+            Bressenham's Algorithm
+          </h1>
+          <p className="text-sm text-gray-600">Line Drawing Algorithm</p>
           <div className="mt-5 flex w-full flex-col gap-5 md:flex-row">
             <div className="w-full">
               <h3 className="text-sm font-medium text-gray-800">Point 1</h3>
@@ -258,4 +260,4 @@ const DDA = () => {
   );
 };
 
-export default DDA;
+export default Bressenham;
