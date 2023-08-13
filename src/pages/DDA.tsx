@@ -1,17 +1,17 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import genGrid from "../utilities/genGrid";
 import dda from "../functions/dda";
 import Input from "../components/inputs/Input";
 import { Button } from "../components/Button";
 
 const DDA = () => {
-  const row = 100;
-  const col = 100;
+  const row = 20;
+  const col = 20;
   const [plane, setPlane] = useState(genGrid(row, col));
 
   const [points, setPoints] = useState({
-    p1: { x: 5, y: 4 },
-    p2: { x: 10, y: 70 },
+    p1: { x: 0, y: 0 },
+    p2: { x: 0, y: 0 },
   });
 
   const [values, setValues] = useState<{
@@ -30,9 +30,9 @@ const DDA = () => {
     coordinates: [[]],
   });
 
-  const plot = () => {
+  const plot = (coordinates: number[][]) => {
     setPlane(genGrid(row, col));
-    values.coordinates.forEach((coord) => {
+    coordinates.forEach((coord) => {
       const x = coord[0];
       const y = coord[1];
 
@@ -48,11 +48,6 @@ const DDA = () => {
       );
     });
   };
-
-  useEffect(() => {
-    setValues(dda(points));
-    plot();
-  }, []);
 
   return (
     <main className="flex min-h-screen w-full flex-col-reverse items-start justify-between gap-10 p-10 xl:flex-row">
@@ -89,7 +84,7 @@ const DDA = () => {
           onSubmit={(e) => {
             e.preventDefault();
             setValues(dda(points));
-            plot();
+            plot(dda(points).coordinates);
           }}
         >
           <h1 className="text-3xl font-medium text-gray-800">DDA Algorithm</h1>
@@ -102,7 +97,7 @@ const DDA = () => {
                   placeholder="x"
                   type="number"
                   min={0}
-                  max={100}
+                  max={col}
                   value={points.p1.x}
                   onChange={(e) =>
                     setPoints((pv) => {
@@ -116,7 +111,7 @@ const DDA = () => {
                   placeholder="y"
                   type="number"
                   min={0}
-                  max={100}
+                  max={col}
                   value={points.p1.y}
                   onChange={(e) =>
                     setPoints((pv) => {
@@ -136,7 +131,7 @@ const DDA = () => {
                   placeholder="x"
                   type="number"
                   min={0}
-                  max={100}
+                  max={col}
                   value={points.p2.x}
                   onChange={(e) =>
                     setPoints((pv) => {
@@ -150,7 +145,7 @@ const DDA = () => {
                   placeholder="y"
                   type="number"
                   min={0}
-                  max={100}
+                  max={col}
                   value={points.p2.y}
                   onChange={(e) =>
                     setPoints((pv) => {
@@ -174,7 +169,7 @@ const DDA = () => {
           </Button>
         </form>
 
-        {values.coordinates && values.coordinates.length > 0 && (
+        {values.coordinates && values.coordinates.length > 1 && (
           <>
             <div className="mt-10 flex w-full flex-wrap items-center justify-between gap-10 border-t pt-5">
               <div className="">
